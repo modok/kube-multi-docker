@@ -1,0 +1,36 @@
+
+{
+  "AWSEBDockerrunVersion": 2,
+  "OBSOLETE": "Elastic Beanstalk now uses docker-compose instead of this type of files",
+  "containerDefinitions": [
+    {
+      "name": "client",
+      "image": "modok64/context_client",
+      "hostname": "client",
+      "essential": false
+    },
+    {
+      "name": "server",
+      "image": "modok64/context_server",
+      "hostname": "api",
+      "essential": false
+    },
+    {
+      "name": "worker",
+      "image": "modok64/context_worker",
+      "essential": false
+    },
+    {
+      "name": "nginx",
+      "image": "modok64/complex_nginx",
+      "essential": true,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        }
+      ],
+      "links": ["client", "server"]
+    }
+  ]
+}
